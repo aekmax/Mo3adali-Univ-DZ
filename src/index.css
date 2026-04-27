@@ -1,0 +1,23 @@
+:root {
+  --font-sans: 'Inter', sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f8f9fa;
+  --color-border-secondary: #e2e8f0;
+  --color-border-tertiary: #edf2f7;
+  --color-text-primary: #1a202c;
+  --color-text-secondary: #4a5568;
+  --color-text-tertiary: #718096;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; width: 100%; }
+body {
+  font-family: var(--font-sans);
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#root { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
