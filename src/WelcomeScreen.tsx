@@ -236,7 +236,7 @@ export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
             lineHeight: 1.6,
           }}>
             مجاني تماماً · 100% Gratuit &nbsp;·&nbsp; لا يتطلب تسجيل · Sans inscription
-            <meta name="google-adsense-account" content="ca-pub-7169435565005220"></meta>
+            
           </p>
         </div>
       </div>

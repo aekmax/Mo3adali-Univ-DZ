@@ -1,4 +1,6 @@
 import { useState, useCallback } from "react";
+import { useLocalGrades } from "./hooks/useLocalGrades";
+
 
 // ─── LABELS BILINGUES ─────────────────────────────────────────────────────────
 const T = {
@@ -2039,16 +2041,14 @@ export default function App({ onBack }) {
   const [facKey, setFacKey] = useState(null);
   const [levelKey, setLevelKey] = useState(null);
   const [spKey, setSpKey] = useState(null);
-  const [grades, setGrades] = useState({});
+ const { grades, updateGrade, resetGrades } = useLocalGrades(facKey, levelKey, spKey);
   const [tab, setTab] = useState("s1");
 
   const facData = facKey ? FACULTIES[facKey] : null;
   const levelData = facData && levelKey ? facData.levels[levelKey] : null;
   const spData = levelData && spKey ? levelData.specialties[spKey] : null;
 
-  const onChange = useCallback((fr, field, val) => {
-    setGrades(prev => ({ ...prev, [fr]: { ...(prev[fr] || {}), [field]: val } }));
-  }, []);
+ const onChange = updateGrade;
 
   const getStats = (semKey) => spData ? calcSemStats(spData.semesters[semKey], grades) : null;
   // Detect which semester keys this specialty uses (S1/S2 or S3/S4)
@@ -2179,7 +2179,7 @@ export default function App({ onBack }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingBottom: 40 }}>
           {Object.entries(lv.specialties).map(([sk, sv]) => (
             <SelectionCard key={sk} emoji={null} titleFr={sk} titleAr={sv.spAr}
-              onClick={() => { setSpKey(sk); setGrades({}); setTab("s1"); }} />
+              onClick={() => { setSpKey(sk); resetGrades(); setTab("s1"); }} />
           ))}
           <div style={{ textAlign: "center", paddingTop: 8, fontSize: 12, color: "var(--color-text-tertiary)" }}>
             {Object.keys(lv.specialties).length} تخصص متاح · {Object.keys(lv.specialties).length} spécialités
